@@ -50,16 +50,16 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Label fx:id="lbErrorNombre" layoutX="58.0" layoutY="344.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorApellidoPaterno" layoutX="60.0" layoutY="447.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorApellidoMaterno" layoutX="65.0" layoutY="546.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorFechaNacimiento" layoutX="63.0" layoutY="646.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorSexo" layoutX="308.0" layoutY="146.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorPeso" layoutX="305.0" layoutY="245.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorEstatura" layoutX="307.0" layoutY="348.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorTallaInicial" layoutX="307.0" layoutY="447.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorTelefono" layoutX="305.0" layoutY="546.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorEmail" layoutX="305.0" layoutY="646.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
-      <Label fx:id="lbErrorContrasena" layoutX="310.0" layoutY="746.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
+      <Label fx:id="lbErrorNombre" layoutX="58.0" layoutY="344.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorApellidoPaterno" layoutX="60.0" layoutY="447.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorApellidoMaterno" layoutX="65.0" layoutY="546.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorFechaNacimiento" layoutX="63.0" layoutY="646.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorSexo" layoutX="308.0" layoutY="146.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorPeso" layoutX="305.0" layoutY="245.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorEstatura" layoutX="307.0" layoutY="348.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorTallaInicial" layoutX="307.0" layoutY="447.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorTelefono" layoutX="305.0" layoutY="546.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorEmail" layoutX="305.0" layoutY="646.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbErrorContrasena" layoutX="310.0" layoutY="746.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

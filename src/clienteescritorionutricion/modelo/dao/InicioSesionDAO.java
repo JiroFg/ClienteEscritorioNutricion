@@ -20,7 +20,7 @@ public class InicioSesionDAO {
             respuesta = gson.fromJson(respuestaPeticion.getContenido(), RespuestaLogin.class);
         }else{
             respuesta.setError(true);
-            respuesta.setMensaje("Error al procesar la petición, por favor intentalo más tarde");
+            respuesta.setMensaje("Error al procesar la petición, por favor intentelo más tarde");
         }
         return respuesta;
     }

@@ -1,5 +1,9 @@
 package clienteescritorionutricion.controller;
 
+import clienteescritorionutricion.modelo.dao.RegistrarPacienteDAO;
+import clienteescritorionutricion.modelo.pojo.Paciente;
+import clienteescritorionutricion.modelo.pojo.Respuesta;
+import clienteescritorionutricion.utils.Utilidades;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -8,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -180,7 +185,7 @@ public class FXMLRegistrarPacienteController implements Initializable {
         String telefono = tfTelefono.getText();
         String email = tfEmail.getText();
         String contrasena = tfContrasena.getText();
-        System.out.println(isValid(
+        if(isValid(
                 nombre,
                 apellidoPaterno,
                 apellidoMaterno,
@@ -192,14 +197,44 @@ public class FXMLRegistrarPacienteController implements Initializable {
                 telefono,
                 email,
                 contrasena
-        ));
+        )){
+            Paciente paciente = new Paciente(
+                    nombre,
+                    apellidoPaterno,
+                    apellidoMaterno,
+                    fechaNacimiento.toString(),
+                    sexo,
+                    Float.parseFloat(peso),
+                    Float.parseFloat(estatura),
+                    Float.parseFloat(tallaInicial),
+                    telefono,
+                    email,
+                    contrasena,
+                    1
+            );
+            registrarPaciente(paciente);
+        }
+    }
+    
+    private void registrarPaciente(Paciente paciente){
+        Respuesta respuesta = RegistrarPacienteDAO.registrarPaciente(paciente);
+        if(respuesta.isError() == false){
+            Utilidades.mostrarAlertaSimple("Paciente registrado con exito", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+        }else{
+            Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
     
     private String tomarSexoDelToggle(){
         RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
         String toggleValue;
         if(selectedRadioButton != null){
-            toggleValue = selectedRadioButton.getText();
+            String aux = selectedRadioButton.getText();
+            if(aux.equals("Masculino")){
+                toggleValue = "M";
+            }else{
+                toggleValue = "F";
+            }
         }else{
             toggleValue = "";
         }
