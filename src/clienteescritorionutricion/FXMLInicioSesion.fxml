@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="363.0" prefWidth="320" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienteescritorionutricion.controller.FXMLInicioSesionController">
+    <children>
+      <Label layoutX="118.0" layoutY="79.0" text="Iniciar sesión" />
+      <TextField fx:id="tfNumPersonal" layoutX="68.0" layoutY="115.0" promptText="Numero de personal" />
+      <Button layoutX="106.0" layoutY="263.0" mnemonicParsing="false" onAction="#btnIniciarSesion" text="Iniciar sesión">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <PasswordField fx:id="pfContrasena" layoutX="68.0" layoutY="190.0" promptText="Contraseña" />
+      <Label fx:id="lbErrorNumPersonal" layoutX="67.0" layoutY="158.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
+      <Label fx:id="lbErrorContra" layoutX="67.0" layoutY="231.0" prefHeight="21.0" prefWidth="187.0" textFill="RED" />
+    </children>
+</AnchorPane>
