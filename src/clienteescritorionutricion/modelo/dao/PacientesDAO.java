@@ -1,15 +1,36 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.modelo.dao;
 
 import clienteescritorionutricion.modelo.ConexionWS;
 import clienteescritorionutricion.modelo.pojo.Paciente;
 import clienteescritorionutricion.modelo.pojo.Respuesta;
 import clienteescritorionutricion.modelo.pojo.RespuestaHTTP;
+import clienteescritorionutricion.modelo.pojo.RespuestaPaciente;
 import clienteescritorionutricion.utils.Constantes;
 import com.google.gson.Gson;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 
 
-public class RegistrarPacienteDAO {
+public class PacientesDAO {
+    
+    public static HashMap<String, Object> obtenerPacientesPorMedico(int idMedico){
+        HashMap<String, Object> respuestaServicio = new HashMap<>();
+        //List<Paciente> listaPacientes = null;
+        String url = Constantes.URL_WS + "pacientes/obtenerPacientesPorMedico/" + idMedico;
+        RespuestaHTTP respuestaPeticion = ConexionWS.peticionGET(url);
+        if(respuestaPeticion.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            //Type listaPaciente = new TypeToken<List<Paciente>>(){}.getType();
+            RespuestaPaciente respuestaPaciente = gson.fromJson(respuestaPeticion.getContenido(), RespuestaPaciente.class);
+            respuestaServicio.put("error", false);
+            respuestaServicio.put("pacientes", respuestaPaciente.getListaPacientes());
+        }else{
+            respuestaServicio.put("error", true);
+            respuestaServicio.put("mensaje", "Error de petición, no se pueden cargar la información de los pacientes");
+        }
+        return respuestaServicio;
+    }
     
     public static Respuesta registrarPaciente(Paciente paciente){
         Respuesta respuesta = new Respuesta();
@@ -44,3 +65,4 @@ public class RegistrarPacienteDAO {
     }
     
 }
+//Edson Jair Fuentes García

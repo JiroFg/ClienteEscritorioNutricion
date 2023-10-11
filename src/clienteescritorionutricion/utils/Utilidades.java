@@ -1,3 +1,4 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.utils;
 
 import javafx.scene.control.Alert;
@@ -14,3 +15,4 @@ public class Utilidades {
     }
     
 }
+//Edson Jair Fuentes García

@@ -1,3 +1,4 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.modelo.pojo;
 
 public class RespuestaHTTP {
@@ -29,3 +30,4 @@ public class RespuestaHTTP {
     }
     
 }
+//Edson Jair Fuentes García

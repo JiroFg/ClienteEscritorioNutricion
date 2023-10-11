@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="clienteescritorionutricion.controller.FXMLAdminPacientesController">
+<AnchorPane id="AnchorPane" prefHeight="623.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienteescritorionutricion.controller.FXMLAdminPacientesController">
    <children>
-      <Button fx:id="btnRegistrarPaciente" layoutX="231.0" layoutY="169.0" mnemonicParsing="false" onAction="#btnRegistrarPacienteListener" text="Registrar Paciente" />
+      <Pane prefHeight="84.0" prefWidth="945.0" style="-fx-background-color: green;">
+         <children>
+            <Label layoutX="35.0" layoutY="32.0" text="Administración pacientes" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="btnRegistrarPaciente" layoutX="466.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnRegistrarPacienteListener" text="Registrar Paciente" />
+      <TextField fx:id="tfBuscarPaciente" layoutX="40.0" layoutY="105.0" prefHeight="31.0" prefWidth="399.0" promptText="Buscar paciente" />
+      <Button fx:id="btnEditarPaciente" layoutX="632.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnEditarPacienteListener" text="Editar Paciente" />
+      <Button fx:id="btnEliminarPaciente" layoutX="773.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnEliminarPacienteListener" text="Eliminar Paciente" />
+      <TableView fx:id="tvPacientes" layoutX="40.0" layoutY="159.0" prefHeight="434.0" prefWidth="866.0">
+        <columns>
+          <TableColumn fx:id="colNombre" prefWidth="98.0" text="Nombre" />
+          <TableColumn fx:id="colApellidoPaterno" prefWidth="137.0" text="Apellido Paterno" />
+            <TableColumn fx:id="colApellidoMaterno" minWidth="4.0" prefWidth="141.0" text="Apellido Materno" />
+            <TableColumn fx:id="colFechaNacimiento" minWidth="0.0" prefWidth="151.0" text="Fecha Nacimiento" />
+            <TableColumn fx:id="colEmail" prefWidth="199.0" text="Email" />
+            <TableColumn fx:id="colTelefono" prefWidth="139.0" text="Telefono" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

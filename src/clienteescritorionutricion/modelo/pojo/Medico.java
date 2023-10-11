@@ -1,3 +1,4 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.modelo.pojo;
 
 public class Medico {
@@ -128,4 +129,9 @@ public class Medico {
         this.fotografia = fotografia;
     }
     
+    @Override
+    public String toString() {
+        return "Medico{" + "idMedico=" + idMedico + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + ", numeroPersonal=" + numeroPersonal + ", numeroCedulaProfesional=" + numeroCedulaProfesional + ", contrasena=" + contrasena + ", idRol=" + idRol + ", idDomicilio=" + idDomicilio + ", fotografia=" + fotografia + '}';
+    }   
 }
+//Edson Jair Fuentes García

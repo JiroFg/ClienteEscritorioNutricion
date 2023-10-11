@@ -1,3 +1,4 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.modelo.dao;
 
 import clienteescritorionutricion.modelo.ConexionWS;
@@ -26,3 +27,4 @@ public class InicioSesionDAO {
     }
     
 }
+//Edson Jair Fuentes García

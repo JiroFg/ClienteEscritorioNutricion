@@ -1,3 +1,4 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.utils;
 
 public class Constantes {
@@ -7,3 +8,4 @@ public class Constantes {
     public static final int ERROR_PETICION = 102;
     
 }
+//Edson Jair Fuentes García

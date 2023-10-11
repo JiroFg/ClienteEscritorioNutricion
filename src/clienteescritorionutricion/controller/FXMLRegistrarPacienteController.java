@@ -1,17 +1,24 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.controller;
 
-import clienteescritorionutricion.modelo.dao.RegistrarPacienteDAO;
+import clienteescritorionutricion.ClienteEscritorioNutricion;
+import clienteescritorionutricion.modelo.dao.PacientesDAO;
+import clienteescritorionutricion.modelo.pojo.Medico;
 import clienteescritorionutricion.modelo.pojo.Paciente;
 import clienteescritorionutricion.modelo.pojo.Respuesta;
 import clienteescritorionutricion.utils.Utilidades;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -25,6 +32,8 @@ import javafx.stage.Stage;
 
 
 public class FXMLRegistrarPacienteController implements Initializable {
+    
+    private int idMedico;
     
     FileChooser fileChooser = new FileChooser();
     
@@ -207,17 +216,17 @@ public class FXMLRegistrarPacienteController implements Initializable {
                     Float.parseFloat(peso),
                     Float.parseFloat(estatura),
                     Float.parseFloat(tallaInicial),
-                    telefono,
                     email,
+                    telefono,
                     contrasena,
-                    1
+                    this.idMedico
             );
             registrarPaciente(paciente);
         }
     }
     
     private void registrarPaciente(Paciente paciente){
-        Respuesta respuesta = RegistrarPacienteDAO.registrarPaciente(paciente);
+        Respuesta respuesta = PacientesDAO.registrarPaciente(paciente);
         if(respuesta.isError() == false){
             Utilidades.mostrarAlertaSimple("Paciente registrado con exito", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
         }else{
@@ -241,4 +250,25 @@ public class FXMLRegistrarPacienteController implements Initializable {
         return toggleValue;
     }
     
+    public void setIdMedico(int idMedico){
+        this.idMedico = idMedico;
+    }
+
+    @FXML
+    private void backBtn(ActionEvent event) {
+        try {
+            Stage stageActual = (Stage) tfNombre.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(ClienteEscritorioNutricion.class.getResource("FXMLAdminPacientes.fxml"));
+            Parent vista = loader.load();
+            FXMLAdminPacientesController adminPacientesController = loader.getController();
+            adminPacientesController.setIdMedico(idMedico);
+            Scene escena = new Scene(vista);
+            stageActual.setScene(escena);
+            stageActual.setTitle("Administrar Pacientes");
+            stageActual.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
+//Edson Jair Fuentes García

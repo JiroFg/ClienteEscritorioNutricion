@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="820.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienteescritorionutricion.controller.FXMLRegistrarPacienteController">
+<AnchorPane id="AnchorPane" prefHeight="820.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienteescritorionutricion.controller.FXMLRegistrarPacienteController">
    <children>
       <Label layoutX="126.0" layoutY="272.0" text="Nombre" />
       <Label layoutX="100.0" layoutY="373.0" text="Apellido Paterno" />
@@ -61,5 +61,6 @@
       <Label fx:id="lbErrorTelefono" layoutX="305.0" layoutY="546.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
       <Label fx:id="lbErrorEmail" layoutX="305.0" layoutY="646.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
       <Label fx:id="lbErrorContrasena" layoutX="310.0" layoutY="746.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
+      <Button layoutX="22.0" layoutY="20.0" mnemonicParsing="false" onAction="#backBtn" text="&lt;" />
    </children>
 </AnchorPane>

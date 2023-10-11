@@ -1,13 +1,13 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.controller;
 import clienteescritorionutricion.ClienteEscritorioNutricion;
 import clienteescritorionutricion.modelo.dao.InicioSesionDAO;
+import clienteescritorionutricion.modelo.pojo.Medico;
 import clienteescritorionutricion.modelo.pojo.RespuestaLogin;
 import clienteescritorionutricion.utils.Utilidades;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +44,7 @@ public class FXMLInicioSesionController implements Initializable {
         lbErrorContra.setText("");
         boolean isValid = true;
         if(numPersonal.isEmpty()){
+
             lbErrorNumPersonal.setText("Número de personal requerido");
             isValid = false;
         }
@@ -61,7 +62,7 @@ public class FXMLInicioSesionController implements Initializable {
         if(respuesta.isError() == false){
             Utilidades.mostrarAlertaSimple("Credenciales validas", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
             try{
-                irPantallaPrincipal();
+                irPantallaPrincipal(respuesta.getMedico());
             }catch(IOException ex){
                 ex.printStackTrace();
             }
@@ -70,13 +71,16 @@ public class FXMLInicioSesionController implements Initializable {
         }
     }
     
-    private void irPantallaPrincipal() throws IOException{
+    private void irPantallaPrincipal(Medico medico) throws IOException{
         Stage stageActual = (Stage) tfNumPersonal.getScene().getWindow();
-        Parent vista = FXMLLoader.load(ClienteEscritorioNutricion.class.getResource("FXMLHome.fxml"));
+        FXMLLoader loader = new FXMLLoader(ClienteEscritorioNutricion.class.getResource("FXMLHome.fxml"));
+        Parent vista = loader.load();
+        FXMLHomeController homeController = loader.getController();
+        homeController.inicializarInformacionMedico(medico);
         Scene escena = new Scene(vista);
         stageActual.setScene(escena);
         stageActual.setTitle("Home");
         stageActual.show();
     }
-    
 }
+//Edson Jair Fuentes García

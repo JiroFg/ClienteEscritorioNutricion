@@ -1,3 +1,4 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.modelo;
 
 import clienteescritorionutricion.modelo.pojo.RespuestaHTTP;
@@ -78,3 +79,4 @@ public class ConexionWS{
     }
     
 }
+//Edson Jair Fuentes García

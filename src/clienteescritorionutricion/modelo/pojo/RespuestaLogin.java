@@ -1,3 +1,4 @@
+//Edson Jair Fuentes García
 package clienteescritorionutricion.modelo.pojo;
 
 
@@ -5,14 +6,14 @@ public class RespuestaLogin {
     
     private boolean error;
     private String mensaje;
-    private Medico medicoSesion;
+    private Medico medico;
     
     public RespuestaLogin(){}
 
     public RespuestaLogin(boolean error, String mensaje, Medico medicoSesion) {
         this.error = error;
         this.mensaje = mensaje;
-        this.medicoSesion = medicoSesion;
+        this.medico = medicoSesion;
     }
 
     public boolean isError() {
@@ -31,12 +32,13 @@ public class RespuestaLogin {
         this.mensaje = mensaje;
     }
 
-    public Medico getMedicoSesion() {
-        return medicoSesion;
+    public Medico getMedico() {
+        return medico;
     }
 
-    public void setMedicoSesion(Medico medicoSesion) {
-        this.medicoSesion = medicoSesion;
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
     
 }
+//Edson Jair Fuentes García

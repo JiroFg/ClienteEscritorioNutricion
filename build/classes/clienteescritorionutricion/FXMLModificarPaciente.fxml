@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="820.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienteescritorionutricion.controller.FXMLRegistrarPacienteController">
-   <children>
+<AnchorPane id="AnchorPane" prefHeight="798.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienteescritorionutricion.controller.FXMLModificarPacienteController">
+    <children>
       <Label layoutX="126.0" layoutY="272.0" text="Nombre" />
       <Label layoutX="100.0" layoutY="373.0" text="Apellido Paterno" />
       <Label layoutX="98.0" layoutY="475.0" text="Apellido Materno" />
@@ -21,11 +21,6 @@
       <Label layoutX="385.0" layoutY="573.0" text="Email" />
       <Label layoutX="370.0" layoutY="475.0" text="Telefono" />
       <Label layoutX="366.0" layoutY="673.0" text="Contraseña" />
-      <Label layoutX="216.0" layoutY="25.0" text="Registrar Paciente">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
       <TextField fx:id="tfNombre" layoutX="60.0" layoutY="302.0" promptText="Nombre" />
       <TextField fx:id="tfApellidoPaterno" layoutX="62.0" layoutY="403.0" promptText="Apellido Paterno" />
       <TextField fx:id="tfApellidoMaterno" layoutX="64.0" layoutY="503.0" promptText="Apellido Materno" />
@@ -37,19 +32,8 @@
       <Label layoutX="99.0" layoutY="61.0" text="Imagen de perfil" />
       <TextField fx:id="tfTallaInicial" layoutX="308.0" layoutY="404.0" promptText="Talla Inicial" />
       <TextField fx:id="tfTelefono" layoutX="307.0" layoutY="503.0" promptText="Telefono" />
-      <TextField fx:id="tfEmail" layoutX="309.0" layoutY="602.0" promptText="Email" />
+      <TextField fx:id="tfEmail" editable="false" layoutX="309.0" layoutY="602.0" promptText="Email" />
       <TextField fx:id="tfContrasena" layoutX="310.0" layoutY="703.0" promptText="Contraseña" />
-      <Button layoutX="79.0" layoutY="232.0" mnemonicParsing="false" onAction="#btnSeleccionarImagenListener" text="Seleccionar Imagen" />
-      <ImageView fx:id="imgPerfil" fitHeight="125.0" fitWidth="128.0" layoutX="92.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@resources/profile_icon.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="104.0" layoutY="684.0" mnemonicParsing="false" onAction="#btnRegistrarListener" prefHeight="48.0" prefWidth="109.0" text="Registrar">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
       <Label fx:id="lbErrorNombre" layoutX="58.0" layoutY="344.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
       <Label fx:id="lbErrorApellidoPaterno" layoutX="60.0" layoutY="447.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
       <Label fx:id="lbErrorApellidoMaterno" layoutX="65.0" layoutY="546.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
@@ -61,6 +45,17 @@
       <Label fx:id="lbErrorTelefono" layoutX="305.0" layoutY="546.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
       <Label fx:id="lbErrorEmail" layoutX="305.0" layoutY="646.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
       <Label fx:id="lbErrorContrasena" layoutX="310.0" layoutY="746.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
-      <Button layoutX="22.0" layoutY="20.0" mnemonicParsing="false" onAction="#backBtn" text="&lt;" />
+      <ImageView fitHeight="127.0" fitWidth="119.0" layoutX="96.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="77.0" layoutY="230.0" mnemonicParsing="false" onAction="#btnSeleccionarImagenListener" text="Seleccionar imagen" />
+      <Button layoutX="92.0" layoutY="695.0" mnemonicParsing="false" onAction="#btnModificarPacienteListener" prefHeight="47.0" prefWidth="129.0" text="Modificar">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="214.0" layoutY="24.0" text="Modificar Paciente">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
