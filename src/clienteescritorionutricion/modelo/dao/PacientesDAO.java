@@ -32,6 +32,50 @@ public class PacientesDAO {
         return respuestaServicio;
     }
     
+    public static Respuesta eliminarPaciente(int idPaciente){
+        Respuesta respuesta = new Respuesta();
+        String url = Constantes.URL_WS + "pacientes/eliminarPaciente/"+idPaciente;
+        RespuestaHTTP respuestaPeticion = ConexionWS.peticionDELETE(url, "");
+        if(respuestaPeticion.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            respuesta = gson.fromJson(respuestaPeticion.getContenido(), Respuesta.class);
+        }else{
+            respuesta.setError(true);
+            respuesta.setMensaje("Error al eliminar paciente");
+        }
+        return respuesta;
+    }
+    
+    public static Respuesta actualizarPaciente(Paciente paciente){
+        Respuesta respuesta = new Respuesta();
+        String url = Constantes.URL_WS + "pacientes/actualizarPaciente";
+        String parametros = String.format("idPaciente=%d&nombre=%s"+
+                "&apellidoPaterno=%s&apellidoMaterno=%s&fechaNacimiento=%s&sexo=%s"+
+                "&peso=%f&estatura=%f&tallaInicial=%s&telefono=%s"+
+                "&contrasena=%s&idMedico=%d",
+                paciente.getIdPaciente(),
+                paciente.getNombre(),
+                paciente.getApellidoPaterno(),
+                paciente.getApellidoMaterno(),
+                paciente.getFechaNacimiento(),
+                paciente.getSexo(),
+                paciente.getPeso(),
+                paciente.getEstatura(),
+                paciente.getTallaInicial(),
+                paciente.getTelefono(),
+                paciente.getContrasena(),
+                paciente.getIdMedico());
+        RespuestaHTTP respuestaPeticion = ConexionWS.peticionPUT(url, parametros);
+        if(respuestaPeticion.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            respuesta = gson.fromJson(respuestaPeticion.getContenido(), Respuesta.class);
+        }else{
+            respuesta.setError(true);
+            respuesta.setMensaje("Error al procesar la petición, por favor intentelo más tarde");
+        }
+        return respuesta;
+    }
+    
     public static Respuesta registrarPaciente(Paciente paciente){
         Respuesta respuesta = new Respuesta();
         String url = Constantes.URL_WS + "pacientes/registrarPaciente";

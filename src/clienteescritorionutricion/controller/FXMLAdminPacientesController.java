@@ -2,16 +2,18 @@
 package clienteescritorionutricion.controller;
 
 import clienteescritorionutricion.ClienteEscritorioNutricion;
+import clienteescritorionutricion.interfaz.IRespuesta;
 import clienteescritorionutricion.modelo.dao.PacientesDAO;
 import clienteescritorionutricion.modelo.pojo.Paciente;
+import clienteescritorionutricion.modelo.pojo.Respuesta;
 import clienteescritorionutricion.utils.Utilidades;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+import javafx.scene.control.ButtonType;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,7 +33,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-public class FXMLAdminPacientesController implements Initializable {
+public class FXMLAdminPacientesController implements Initializable, IRespuesta {
     
     private int idMedico;
     
@@ -99,7 +102,7 @@ public class FXMLAdminPacientesController implements Initializable {
         FXMLLoader loader = new FXMLLoader(ClienteEscritorioNutricion.class.getResource("FXMLRegistrarPaciente.fxml"));
         Parent vista = loader.load();
         FXMLRegistrarPacienteController registrarPacienteController = loader.getController();
-        registrarPacienteController.setIdMedico(idMedico);
+        registrarPacienteController.inicializarInformacion(idMedico, this);
         Scene escena = new Scene(vista);
         Stage escenarioRegistrar = new Stage();
         escenarioRegistrar.setScene(escena);
@@ -113,7 +116,7 @@ public class FXMLAdminPacientesController implements Initializable {
         FXMLLoader loader = new FXMLLoader(ClienteEscritorioNutricion.class.getResource("FXMLModificarPaciente.fxml"));
         Parent vista = loader.load();
         FXMLModificarPacienteController modificarPacienteController = loader.getController();
-        modificarPacienteController.setPaciente(paciente);
+        modificarPacienteController.inicializarInformacion(paciente, this);
         Scene escena = new Scene(vista);
         Stage escenarioRegistrar = new Stage();
         escenarioRegistrar.setScene(escena);
@@ -144,7 +147,33 @@ public class FXMLAdminPacientesController implements Initializable {
 
     @FXML
     private void btnEliminarPacienteListener(ActionEvent event) {
-        
+        Paciente paciente = tvPacientes.getSelectionModel().getSelectedItem();
+        if(paciente != null){
+            Optional<ButtonType> respuestaConf = Utilidades.mostrarAlertaConfirmacion("Eliminar paciente", "¿Esta seguro que desea eliminar al paciente "+paciente.getNombre()+"?");
+            if(respuestaConf.get() == ButtonType.OK){
+                eliminarPaciente(paciente.getIdPaciente());
+                pacientes.clear();
+                descargarPacientes();
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Selección requerida", "Seleccione un elemento de la lista", Alert.AlertType.WARNING);
+        }
+    }
+
+    @Override
+    public void notificarGuardadoPaciente(String nombrePaciente) {
+        System.out.println(nombrePaciente);
+        pacientes.clear();
+        descargarPacientes();
+    }
+    
+    private void eliminarPaciente(int idPaciente){
+        Respuesta respuesta = PacientesDAO.eliminarPaciente(idPaciente);
+        if(!respuesta.isError()){
+            Utilidades.mostrarAlertaSimple("Paciente eliminado correctamente", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al eliminar paciente", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
 }
 //Edson Jair Fuentes García

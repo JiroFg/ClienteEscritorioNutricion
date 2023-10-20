@@ -1,24 +1,19 @@
 //Edson Jair Fuentes García
 package clienteescritorionutricion.controller;
 
-import clienteescritorionutricion.ClienteEscritorioNutricion;
+import clienteescritorionutricion.interfaz.IRespuesta;
 import clienteescritorionutricion.modelo.dao.PacientesDAO;
-import clienteescritorionutricion.modelo.pojo.Medico;
 import clienteescritorionutricion.modelo.pojo.Paciente;
 import clienteescritorionutricion.modelo.pojo.Respuesta;
 import clienteescritorionutricion.utils.Utilidades;
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -34,6 +29,7 @@ import javafx.stage.Stage;
 public class FXMLRegistrarPacienteController implements Initializable {
     
     private int idMedico;
+    private IRespuesta observador;
     
     FileChooser fileChooser = new FileChooser();
     
@@ -94,6 +90,17 @@ public class FXMLRegistrarPacienteController implements Initializable {
         group = new ToggleGroup();
         rbMasculino.setToggleGroup(group);
         rbFemenino.setToggleGroup(group);
+        /* group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if(rbFemenino.isSelected()){
+                    sexo = "F";
+                }else{
+                    sexo = "M";
+                }
+            }
+            
+        }); */
     }    
 
     @FXML
@@ -118,7 +125,7 @@ public class FXMLRegistrarPacienteController implements Initializable {
             String contrasena
     ){
         boolean isValid = true;
-        resetearCampos();
+        resetearError();
         
         if(nombre.isEmpty()){
             lbErrorNombre.setText("Nombre requerido");
@@ -167,7 +174,7 @@ public class FXMLRegistrarPacienteController implements Initializable {
         return isValid;
     }
     
-    private void resetearCampos(){
+    private void resetearError(){
         lbErrorNombre.setText("");
         lbErrorApellidoPaterno.setText("");
         lbErrorApellidoMaterno.setText("");
@@ -180,6 +187,20 @@ public class FXMLRegistrarPacienteController implements Initializable {
         lbErrorEmail.setText("");
         lbErrorContrasena.setText("");
     }
+    
+    //private void resetearCampos(){
+    //    tfNombre.setText("");
+    //    tfApellidoPaterno.setText("");
+    //    tfApellidoMaterno.setText("");
+    //    dpFechaNacimiento.setValue(null);
+    //    tomarSexoDelToggle();
+    //    tfPeso.setText("");
+    //    tfEstatura.setText("");
+    //    tfTallaInicial.setText("");
+    //    tfTelefono.setText("");
+    //    tfEmail.setText("");
+    //    tfContrasena.setText("");
+    //}
 
     @FXML
     private void btnRegistrarListener(ActionEvent event) {
@@ -227,8 +248,10 @@ public class FXMLRegistrarPacienteController implements Initializable {
     
     private void registrarPaciente(Paciente paciente){
         Respuesta respuesta = PacientesDAO.registrarPaciente(paciente);
-        if(respuesta.isError() == false){
+        if(!respuesta.isError()){
             Utilidades.mostrarAlertaSimple("Paciente registrado con exito", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            observador.notificarGuardadoPaciente(paciente.getNombre());
+            cerrarVentana();
         }else{
             Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }
@@ -250,25 +273,14 @@ public class FXMLRegistrarPacienteController implements Initializable {
         return toggleValue;
     }
     
-    public void setIdMedico(int idMedico){
+    public void inicializarInformacion(int idMedico, IRespuesta observador){
         this.idMedico = idMedico;
+        this.observador = observador;
     }
-
-    @FXML
-    private void backBtn(ActionEvent event) {
-        try {
-            Stage stageActual = (Stage) tfNombre.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(ClienteEscritorioNutricion.class.getResource("FXMLAdminPacientes.fxml"));
-            Parent vista = loader.load();
-            FXMLAdminPacientesController adminPacientesController = loader.getController();
-            adminPacientesController.setIdMedico(idMedico);
-            Scene escena = new Scene(vista);
-            stageActual.setScene(escena);
-            stageActual.setTitle("Administrar Pacientes");
-            stageActual.show();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    
+    private void cerrarVentana(){
+        Stage escenario = (Stage) tfNombre.getScene().getWindow();
+        escenario.close();
     }
 }
 //Edson Jair Fuentes García

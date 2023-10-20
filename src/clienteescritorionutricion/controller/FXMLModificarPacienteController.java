@@ -1,23 +1,30 @@
 //Edson Jair Fuentes García
 package clienteescritorionutricion.controller;
 
+import clienteescritorionutricion.interfaz.IRespuesta;
+import clienteescritorionutricion.modelo.dao.PacientesDAO;
 import clienteescritorionutricion.modelo.pojo.Paciente;
+import clienteescritorionutricion.modelo.pojo.Respuesta;
+import clienteescritorionutricion.utils.Utilidades;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 
 public class FXMLModificarPacienteController implements Initializable {
 
     private Paciente paciente;
+    private IRespuesta observador;
     
     @FXML
     private TextField tfNombre;
@@ -85,6 +92,54 @@ public class FXMLModificarPacienteController implements Initializable {
 
     @FXML
     private void btnModificarPacienteListener(ActionEvent event) {
+        String nombre = tfNombre.getText();
+        String apellidoPaterno = tfApellidoPaterno.getText();
+        String apellidoMaterno = tfApellidoMaterno.getText();
+        LocalDate fechaNacimiento = dpFechaNacimiento.getValue();
+        String sexo = tomarSexoDelToggle();
+        String peso = tfPeso.getText();
+        String estatura = tfEstatura.getText();
+        String tallaInicial = tfTallaInicial.getText();
+        String telefono = tfTelefono.getText();
+        String email = tfEmail.getText();
+        String contrasena = tfContrasena.getText();
+        if(isValid(
+                nombre,
+                apellidoPaterno,
+                apellidoMaterno,
+                fechaNacimiento,
+                sexo,
+                peso,
+                estatura,
+                tallaInicial,
+                telefono,
+                email,
+                contrasena
+        )){
+            paciente.setNombre(nombre);
+            paciente.setApellidoPaterno(apellidoPaterno);
+            paciente.setApellidoMaterno(apellidoMaterno);
+            paciente.setFechaNacimiento(fechaNacimiento.toString());
+            paciente.setSexo(sexo);
+            paciente.setPeso(Float.parseFloat(peso));
+            paciente.setEstatura(Float.parseFloat(estatura));
+            paciente.setTallaInicial(Float.parseFloat(tallaInicial));
+            paciente.setEmail(email);
+            paciente.setTelefono(telefono);
+            paciente.setContrasena(contrasena);
+            modificarPaciente(paciente);
+        }
+    }
+    
+    private void modificarPaciente(Paciente paciente){
+        Respuesta respuesta = PacientesDAO.actualizarPaciente(paciente);
+        if(!respuesta.isError()){
+            Utilidades.mostrarAlertaSimple("Paciente actualizado con exito", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            observador.notificarGuardadoPaciente(paciente.getNombre());
+            cerrarVentana();
+        }else{
+            Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
     
     private boolean isValid(
@@ -178,7 +233,8 @@ public class FXMLModificarPacienteController implements Initializable {
         tfContrasena.setText(paciente.getContrasena());
     }
     
-    public void setPaciente(Paciente paciente){
+    public void inicializarInformacion(Paciente paciente, IRespuesta observador){
+        this.observador = observador;
         this.paciente = paciente;
         setCampos();
     }
@@ -189,6 +245,27 @@ public class FXMLModificarPacienteController implements Initializable {
         }else{
             rbFemenino.setSelected(true);
         }
+    }
+    
+    private String tomarSexoDelToggle(){
+        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+        String toggleValue;
+        if(selectedRadioButton != null){
+            String aux = selectedRadioButton.getText();
+            if(aux.equals("Masculino")){
+                toggleValue = "M";
+            }else{
+                toggleValue = "F";
+            }
+        }else{
+            toggleValue = "";
+        }
+        return toggleValue;
+    }
+    
+    private void cerrarVentana(){
+        Stage escenario = (Stage) tfNombre.getScene().getWindow();
+        escenario.close();
     }
     
 }

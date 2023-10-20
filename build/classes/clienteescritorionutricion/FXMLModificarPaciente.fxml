@@ -32,7 +32,7 @@
       <Label layoutX="99.0" layoutY="61.0" text="Imagen de perfil" />
       <TextField fx:id="tfTallaInicial" layoutX="308.0" layoutY="404.0" promptText="Talla Inicial" />
       <TextField fx:id="tfTelefono" layoutX="307.0" layoutY="503.0" promptText="Telefono" />
-      <TextField fx:id="tfEmail" editable="false" layoutX="309.0" layoutY="602.0" promptText="Email" />
+      <TextField fx:id="tfEmail" disable="true" editable="false" layoutX="309.0" layoutY="602.0" promptText="Email" />
       <TextField fx:id="tfContrasena" layoutX="310.0" layoutY="703.0" promptText="Contraseña" />
       <Label fx:id="lbErrorNombre" layoutX="58.0" layoutY="344.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
       <Label fx:id="lbErrorApellidoPaterno" layoutX="60.0" layoutY="447.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />

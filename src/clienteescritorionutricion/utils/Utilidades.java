@@ -1,7 +1,9 @@
 //Edson Jair Fuentes García
 package clienteescritorionutricion.utils;
 
+import java.util.Optional;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 
 public class Utilidades {
@@ -12,6 +14,14 @@ public class Utilidades {
         dialogoAlerta.setHeaderText(null);
         dialogoAlerta.setContentText(mensaje);
         dialogoAlerta.showAndWait();
+    }
+    
+    public static Optional<ButtonType> mostrarAlertaConfirmacion(String titulo, String confirmacion){
+        Alert dialogoAlertaConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        dialogoAlertaConfirmacion.setTitle(titulo);
+        dialogoAlertaConfirmacion.setHeaderText(null);
+        dialogoAlertaConfirmacion.setContentText(confirmacion);
+        return dialogoAlertaConfirmacion.showAndWait();
     }
     
 }
