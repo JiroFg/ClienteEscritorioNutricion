@@ -112,6 +112,7 @@ public class FXMLAdminPacientesController implements Initializable, IRespuesta {
     }
     
     private void irPantallaModificarPaciente(Paciente paciente) throws IOException{
+        System.out.println(paciente.toString());
         Stage stageActual = (Stage) btnRegistrarPaciente.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(ClienteEscritorioNutricion.class.getResource("FXMLModificarPaciente.fxml"));
         Parent vista = loader.load();

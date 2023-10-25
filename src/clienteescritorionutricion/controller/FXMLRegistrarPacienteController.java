@@ -6,8 +6,6 @@ import clienteescritorionutricion.modelo.dao.PacientesDAO;
 import clienteescritorionutricion.modelo.pojo.Paciente;
 import clienteescritorionutricion.modelo.pojo.Respuesta;
 import clienteescritorionutricion.utils.Utilidades;
-import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -20,9 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -30,8 +25,6 @@ public class FXMLRegistrarPacienteController implements Initializable {
     
     private int idMedico;
     private IRespuesta observador;
-    
-    FileChooser fileChooser = new FileChooser();
     
     @FXML
     private TextField tfNombre;
@@ -60,8 +53,6 @@ public class FXMLRegistrarPacienteController implements Initializable {
     private TextField tfEmail;
     @FXML
     private TextField tfContrasena;
-    @FXML
-    private ImageView imgPerfil;
     @FXML
     private Label lbErrorNombre;
     @FXML
@@ -101,14 +92,6 @@ public class FXMLRegistrarPacienteController implements Initializable {
             }
             
         }); */
-    }    
-
-    @FXML
-    private void btnSeleccionarImagenListener(ActionEvent event) throws MalformedURLException {
-        Stage stageActual = (Stage) tfNombre.getScene().getWindow();
-        File selectedFile = fileChooser.showOpenDialog(stageActual);
-        URL url = selectedFile.toURI().toURL();
-        imgPerfil.setImage(new Image(url.toExternalForm()));
     }
     
     private boolean isValid(
@@ -187,20 +170,6 @@ public class FXMLRegistrarPacienteController implements Initializable {
         lbErrorEmail.setText("");
         lbErrorContrasena.setText("");
     }
-    
-    //private void resetearCampos(){
-    //    tfNombre.setText("");
-    //    tfApellidoPaterno.setText("");
-    //    tfApellidoMaterno.setText("");
-    //    dpFechaNacimiento.setValue(null);
-    //    tomarSexoDelToggle();
-    //    tfPeso.setText("");
-    //    tfEstatura.setText("");
-    //    tfTallaInicial.setText("");
-    //    tfTelefono.setText("");
-    //    tfEmail.setText("");
-    //    tfContrasena.setText("");
-    //}
 
     @FXML
     private void btnRegistrarListener(ActionEvent event) {

@@ -6,9 +6,16 @@ import clienteescritorionutricion.modelo.dao.PacientesDAO;
 import clienteescritorionutricion.modelo.pojo.Paciente;
 import clienteescritorionutricion.modelo.pojo.Respuesta;
 import clienteescritorionutricion.utils.Utilidades;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.ResourceBundle;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,13 +25,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 
 public class FXMLModificarPacienteController implements Initializable {
 
     private Paciente paciente;
     private IRespuesta observador;
+    private File archivoImg;
     
     @FXML
     private TextField tfNombre;
@@ -75,6 +87,8 @@ public class FXMLModificarPacienteController implements Initializable {
     private Label lbErrorEmail;
     @FXML
     private Label lbErrorContrasena;
+    @FXML
+    private ImageView imgView;
 
     /**
      * Initializes the controller class.
@@ -85,10 +99,6 @@ public class FXMLModificarPacienteController implements Initializable {
         rbMasculino.setToggleGroup(group);
         rbFemenino.setToggleGroup(group);
     }    
-
-    @FXML
-    private void btnSeleccionarImagenListener(ActionEvent event) {
-    }
 
     @FXML
     private void btnModificarPacienteListener(ActionEvent event) {
@@ -231,6 +241,7 @@ public class FXMLModificarPacienteController implements Initializable {
         tfTelefono.setText(paciente.getTelefono());
         tfEmail.setText(paciente.getEmail());
         tfContrasena.setText(paciente.getContrasena());
+        obtenerImgServicio();
     }
     
     public void inicializarInformacion(Paciente paciente, IRespuesta observador){
@@ -268,5 +279,63 @@ public class FXMLModificarPacienteController implements Initializable {
         escenario.close();
     }
     
+    @FXML
+    private void btnSeleccionarImagenListener(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        Stage stageActual = (Stage) tfNombre.getScene().getWindow();
+        fileChooser.setTitle("Selecciona una imagen");
+        FileChooser.ExtensionFilter filterImg = new FileChooser.ExtensionFilter("Archivos PNG (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(filterImg);
+        archivoImg = fileChooser.showOpenDialog(stageActual);
+        if(archivoImg != null){
+            mostrarImg(archivoImg);
+        }
+    }
+
+    @FXML
+    private void guardarImgListener(ActionEvent event) {
+        if(archivoImg != null){
+            cargarFotoServidor(archivoImg);
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione una fotografía", "Se requiere una seleccionar una fotografía para actualizar", Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void cargarFotoServidor(File img){
+        try{
+            byte[] imgBytes = Files.readAllBytes(img.toPath());
+            Respuesta respuesta = PacientesDAO.subirFotografiaPaciente(paciente.getIdPaciente(), imgBytes);
+            if(!respuesta.isError()){
+                Utilidades.mostrarAlertaSimple("Fotografía actualizada", respuesta.getMensaje(), Alert.AlertType.INFORMATION);
+            }else{
+                Utilidades.mostrarAlertaSimple("Error", respuesta.getMensaje(), Alert.AlertType.ERROR);
+            }
+        }catch(IOException e){
+            Utilidades.mostrarAlertaSimple("Error", "Error: "+e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void mostrarImg(File img){
+        try{
+            BufferedImage buffer = ImageIO.read(img);
+            Image image = SwingFXUtils.toFXImage(buffer, null);
+            imgView.setImage(image);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    private void obtenerImgServicio(){
+        Paciente pacienteFoto = PacientesDAO.obtenerFotografiaPaciente(paciente.getIdPaciente());
+        if(pacienteFoto != null && pacienteFoto.getFotoBase64() != null && !pacienteFoto.getFotoBase64().isEmpty()){
+            mostrarImgServidor(pacienteFoto.getFotoBase64());
+        }
+    }
+    
+    private void mostrarImgServidor(String fotoBase64){  
+        byte[] img = Base64.getDecoder().decode(fotoBase64.replaceAll("\\n", ""));
+        Image image = new Image(new ByteArrayInputStream(img));
+        imgView.setImage(image);
+    }
 }
 //Edson Jair Fuentes García

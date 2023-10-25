@@ -29,7 +29,6 @@
       <RadioButton fx:id="rbFemenino" layoutX="352.0" layoutY="86.0" mnemonicParsing="false" text="Femenino" />
       <TextField fx:id="tfPeso" layoutX="305.0" layoutY="201.0" prefHeight="31.0" prefWidth="187.0" promptText="Peso" />
       <TextField fx:id="tfEstatura" layoutX="305.0" layoutY="302.0" prefHeight="31.0" prefWidth="187.0" promptText="Estatura" />
-      <Label layoutX="99.0" layoutY="61.0" text="Imagen de perfil" />
       <TextField fx:id="tfTallaInicial" layoutX="308.0" layoutY="404.0" promptText="Talla Inicial" />
       <TextField fx:id="tfTelefono" layoutX="307.0" layoutY="503.0" promptText="Telefono" />
       <TextField fx:id="tfEmail" disable="true" editable="false" layoutX="309.0" layoutY="602.0" promptText="Email" />
@@ -45,8 +44,8 @@
       <Label fx:id="lbErrorTelefono" layoutX="305.0" layoutY="546.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
       <Label fx:id="lbErrorEmail" layoutX="305.0" layoutY="646.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
       <Label fx:id="lbErrorContrasena" layoutX="310.0" layoutY="746.0" prefHeight="21.0" prefWidth="187.0" textAlignment="CENTER" textFill="RED" />
-      <ImageView fitHeight="127.0" fitWidth="119.0" layoutX="96.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="77.0" layoutY="230.0" mnemonicParsing="false" onAction="#btnSeleccionarImagenListener" text="Seleccionar imagen" />
+      <ImageView fx:id="imgView" fitHeight="127.0" fitWidth="119.0" layoutX="97.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="77.0" layoutY="193.0" mnemonicParsing="false" onAction="#btnSeleccionarImagenListener" text="Seleccionar imagen" />
       <Button layoutX="92.0" layoutY="695.0" mnemonicParsing="false" onAction="#btnModificarPacienteListener" prefHeight="47.0" prefWidth="129.0" text="Modificar">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -57,5 +56,6 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
+      <Button layoutX="88.0" layoutY="230.0" mnemonicParsing="false" onAction="#guardarImgListener" text="Guardar imagen" />
    </children>
 </AnchorPane>

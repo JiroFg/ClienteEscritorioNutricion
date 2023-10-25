@@ -19,6 +19,7 @@ public class Paciente {
     private byte[] fotografia;
     private int idDomicilio;
     private int idMedico;
+    private String fotoBase64;
     
     public Paciente(){}
     
@@ -173,6 +174,14 @@ public class Paciente {
 
     public void setIdMedico(int idMedico) {
         this.idMedico = idMedico;
+    }
+    
+    public String getFotoBase64() {
+        return fotoBase64;
+    }
+
+    public void setFotoBase64(String fotoBase64) {
+        this.fotoBase64 = fotoBase64;
     }
     
     @Override

@@ -108,5 +108,29 @@ public class PacientesDAO {
         return respuesta;
     }
     
+    public static Respuesta subirFotografiaPaciente(int idPaciente, byte[] fotografia){
+        Respuesta respuesta = new Respuesta();
+        String url = Constantes.URL_WS + "pacientes/subirFotografia/" + idPaciente;
+        RespuestaHTTP respuestaHttp = ConexionWS.peticionPUTImg(url, fotografia);
+        if(respuestaHttp.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            respuesta = gson.fromJson(respuestaHttp.getContenido(), Respuesta.class);
+        }else{
+            respuesta.setError(true);
+            respuesta.setMensaje("Hubo un error al actualizar la fotografía del paciente, intentelo más tarde");
+        }
+        return respuesta;
+    }
+    
+    public static Paciente obtenerFotografiaPaciente(int idPaciente){
+        Paciente paciente = null;
+        String url = Constantes.URL_WS + "pacientes/obtenerFotografia/" + idPaciente;
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            paciente = gson.fromJson(respuesta.getContenido(), Paciente.class);
+        }
+        return paciente;
+    }
 }
 //Edson Jair Fuentes García
