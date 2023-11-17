@@ -18,10 +18,10 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="btnRegistrarPaciente" layoutX="466.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnRegistrarPacienteListener" text="Registrar Paciente" />
-      <TextField fx:id="tfBuscarPaciente" layoutX="40.0" layoutY="105.0" prefHeight="31.0" prefWidth="399.0" promptText="Buscar paciente" />
-      <Button fx:id="btnEditarPaciente" layoutX="632.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnEditarPacienteListener" text="Editar Paciente" />
-      <Button fx:id="btnEliminarPaciente" layoutX="773.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnEliminarPacienteListener" text="Eliminar Paciente" />
+      <Button fx:id="btnRegistrarPaciente" layoutX="367.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnRegistrarPacienteListener" text="Registrar Paciente" />
+      <TextField fx:id="tfBuscarPaciente" layoutX="40.0" layoutY="105.0" prefHeight="31.0" prefWidth="305.0" promptText="Buscar paciente" />
+      <Button fx:id="btnEditarPaciente" layoutX="530.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnEditarPacienteListener" text="Editar Paciente" />
+      <Button fx:id="btnEliminarPaciente" layoutX="670.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnEliminarPacienteListener" text="Eliminar Paciente" />
       <TableView fx:id="tvPacientes" layoutX="40.0" layoutY="159.0" prefHeight="434.0" prefWidth="866.0">
         <columns>
           <TableColumn fx:id="colNombre" prefWidth="98.0" text="Nombre" />
@@ -32,5 +32,6 @@
             <TableColumn fx:id="colTelefono" prefWidth="139.0" text="Telefono" />
         </columns>
       </TableView>
+      <Button layoutX="823.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnDomicilioListener" text="Domicilio" />
    </children>
 </AnchorPane>

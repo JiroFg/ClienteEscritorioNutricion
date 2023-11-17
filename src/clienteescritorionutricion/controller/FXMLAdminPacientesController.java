@@ -12,7 +12,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import javafx.scene.control.ButtonType;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -112,7 +111,6 @@ public class FXMLAdminPacientesController implements Initializable, IRespuesta {
     }
     
     private void irPantallaModificarPaciente(Paciente paciente) throws IOException{
-        System.out.println(paciente.toString());
         Stage stageActual = (Stage) btnRegistrarPaciente.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(ClienteEscritorioNutricion.class.getResource("FXMLModificarPaciente.fxml"));
         Parent vista = loader.load();
@@ -128,7 +126,7 @@ public class FXMLAdminPacientesController implements Initializable, IRespuesta {
     
     public void setIdMedico(int idMedico){
         this.idMedico = idMedico;
-         descargarPacientes();
+        descargarPacientes();
     }
 
     @FXML
@@ -176,5 +174,35 @@ public class FXMLAdminPacientesController implements Initializable, IRespuesta {
             Utilidades.mostrarAlertaSimple("Error al eliminar paciente", respuesta.getMensaje(), Alert.AlertType.ERROR);
         }
     }
+
+    @FXML
+    private void btnDomicilioListener(ActionEvent event) {
+        int posicion = tvPacientes.getSelectionModel().getSelectedIndex();
+        if(posicion != -1){
+            Paciente paciente = pacientes.get(posicion);
+            try {
+                irPantallaDomicilio(paciente);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Selección requerida", "Seleccione un elemento de la lista", Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void irPantallaDomicilio(Paciente paciente) throws IOException{
+        Stage stageActual = (Stage) btnRegistrarPaciente.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(ClienteEscritorioNutricion.class.getResource("FXMLFormularioDomicilio.fxml"));
+        Parent vista = loader.load();
+        FXMLFormularioDomicilioController formularioDomicilioController = loader.getController();
+        formularioDomicilioController.inicializarInformacion(paciente.getIdPaciente());
+        Scene escena = new Scene(vista);
+        Stage escenarioRegistrar = new Stage();
+        escenarioRegistrar.setScene(escena);
+        escenarioRegistrar.setTitle("Domicilio");
+        escenarioRegistrar.initModality(Modality.APPLICATION_MODAL);
+        escenarioRegistrar.show();
+    }
+
 }
 //Edson Jair Fuentes García

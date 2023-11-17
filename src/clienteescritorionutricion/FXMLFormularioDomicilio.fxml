@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="482.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienteescritorionutricion.controller.FXMLFormularioDomicilioController">
+   <children>
+      <Button layoutX="75.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnGuardarListener" prefHeight="46.0" prefWidth="114.0" text="Guardar">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="418.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnCancelarListener" prefHeight="46.0" prefWidth="114.0" text="Cancelar" />
+      <TextField fx:id="tfCalle" layoutX="73.0" layoutY="99.0" prefHeight="31.0" prefWidth="336.0" />
+      <TextField fx:id="tfColonia" layoutX="335.0" layoutY="206.0" prefHeight="31.0" prefWidth="201.0" />
+      <TextField fx:id="tfCodigoPostal" layoutX="75.0" layoutY="206.0" prefHeight="31.0" prefWidth="240.0" />
+      <ComboBox fx:id="cbEstado" layoutX="75.0" layoutY="294.0" onAction="#cbEstadoEventListener" prefHeight="31.0" prefWidth="218.0" promptText="Estado" />
+      <ComboBox fx:id="cbMunicipio" layoutX="317.0" layoutY="294.0" prefHeight="31.0" prefWidth="218.0" promptText="Municipio" />
+      <Label layoutX="267.0" layoutY="26.0" text="Domicilio">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="73.0" layoutY="69.0" text="Calle" />
+      <Label layoutX="334.0" layoutY="171.0" text="Colonia" />
+      <Label layoutX="75.0" layoutY="171.0" text="Codigo Postal" />
+      <Label layoutX="435.0" layoutY="69.0" text="Numero" />
+      <TextField fx:id="tfNumero" layoutX="435.0" layoutY="99.0" prefHeight="31.0" prefWidth="100.0" />
+      <Label fx:id="errorCalle" layoutX="72.0" layoutY="142.0" prefHeight="21.0" prefWidth="100.0" textFill="RED" />
+      <Label fx:id="errorNumero" layoutX="435.0" layoutY="142.0" prefHeight="21.0" prefWidth="68.0" textFill="RED" />
+      <Label fx:id="errorCodigoPostal" layoutX="75.0" layoutY="256.0" prefHeight="21.0" prefWidth="142.0" textFill="RED" />
+      <Label fx:id="errorColonia" layoutX="335.0" layoutY="256.0" prefHeight="21.0" prefWidth="107.0" textFill="RED" />
+      <Label fx:id="errorEstado" layoutX="75.0" layoutY="344.0" prefHeight="21.0" prefWidth="93.0" textFill="RED" />
+      <Label fx:id="errorMunicipio" layoutX="317.0" layoutY="344.0" prefHeight="21.0" prefWidth="93.0" textFill="RED" />
+      <Button layoutX="250.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnActualizarListener" prefHeight="46.0" prefWidth="114.0" text="Actualizar" />
+   </children>
+</AnchorPane>

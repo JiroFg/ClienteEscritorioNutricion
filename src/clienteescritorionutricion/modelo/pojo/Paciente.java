@@ -17,7 +17,6 @@ public class Paciente {
     private String telefono;
     private String contrasena;
     private byte[] fotografia;
-    private int idDomicilio;
     private int idMedico;
     private String fotoBase64;
     
@@ -38,7 +37,7 @@ public class Paciente {
         this.idMedico = idMedico;
     }
     
-    public Paciente(int idPaciente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String sexo, float peso, float estatura, float tallaInicial, String email, String telefono, String contrasena, byte[] fotografia, int idDomicilio, int idMedico) {
+    public Paciente(int idPaciente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String sexo, float peso, float estatura, float tallaInicial, String email, String telefono, String contrasena, byte[] fotografia, int idMedico) {
         this.idPaciente = idPaciente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -52,7 +51,6 @@ public class Paciente {
         this.telefono = telefono;
         this.contrasena = contrasena;
         this.fotografia = fotografia;
-        this.idDomicilio = idDomicilio;
         this.idMedico = idMedico;
     }
 
@@ -160,14 +158,6 @@ public class Paciente {
         this.fotografia = fotografia;
     }
 
-    public int getIdDomicilio() {
-        return idDomicilio;
-    }
-
-    public void setIdDomicilio(int idDomicilio) {
-        this.idDomicilio = idDomicilio;
-    }
-
     public int getIdMedico() {
         return idMedico;
     }
@@ -186,7 +176,7 @@ public class Paciente {
     
     @Override
     public String toString() {
-        return "Paciente{" + "idPaciente=" + idPaciente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + ", peso=" + peso + ", estatura=" + estatura + ", tallaInicial=" + tallaInicial + ", email=" + email + ", telefono=" + telefono + ", contrasena=" + contrasena + ", fotografia=" + fotografia + ", idDomicilio=" + idDomicilio + ", idMedico=" + idMedico + '}';
+        return "Paciente{" + "idPaciente=" + idPaciente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + ", peso=" + peso + ", estatura=" + estatura + ", tallaInicial=" + tallaInicial + ", email=" + email + ", telefono=" + telefono + ", contrasena=" + contrasena + ", fotografia=" + fotografia + ", idMedico=" + idMedico + '}';
     }
     
 }
